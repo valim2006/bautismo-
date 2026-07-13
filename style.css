@@ -17,39 +17,39 @@
     --gold-light: #f59e0b;        /* Oro brillante */
     --gold-dark: #b45309;         /* Oro oscuro */
     --text-color: #1e3a8a;        /* Azul oscuro a tono con León */
-    --card-scale: 1.65;           /* Compensa la escala del sobre (0.65 * 1.65 = 1.07 final, unos 535px en desktop) */
-    --card-y: -150px;             /* Desplazamiento Y de la tarjeta */
-    --envelope-y: 190px;          /* Desplazamiento Y del sobre */
+    --card-scale: 1.38;           /* Compensa la escala del sobre (0.65 * 1.38 = 0.90 final, unos 680px de alto en desktop) */
+    --card-y: -180px;             /* Desplazamiento Y de la tarjeta */
+    --envelope-y: 220px;          /* Desplazamiento Y del sobre */
 }
 
 @media (max-width: 600px) {
     :root {
-        --card-scale: 1.35;       /* 0.65 * 1.35 = 0.88 final, unos 438px en tablets */
-        --card-y: -130px;
-        --envelope-y: 150px;
+        --card-scale: 1.14;       /* 0.65 * 1.14 = 0.74 final, unos 560px de alto en tablets */
+        --card-y: -150px;
+        --envelope-y: 170px;
     }
 }
 
 @media (max-width: 440px) {
     :root {
-        --card-scale: 1.20;       /* 0.65 * 1.20 = 0.78 final, unos 390px en teléfonos grandes */
-        --card-y: -120px;
-        --envelope-y: 140px;
+        --card-scale: 1.06;       /* 0.65 * 1.06 = 0.69 final, unos 520px de alto en teléfonos grandes */
+        --card-y: -140px;
+        --envelope-y: 150px;
     }
 }
 
 @media (max-width: 400px) {
     :root {
-        --card-scale: 1.10;       /* 0.65 * 1.10 = 0.715 final, unos 358px en teléfonos estándar */
-        --card-y: -110px;
-        --envelope-y: 130px;
+        --card-scale: 1.01;       /* 0.65 * 1.01 = 0.66 final, unos 500px de alto en teléfonos estándar */
+        --card-y: -130px;
+        --envelope-y: 140px;
     }
 }
 
 @media (max-width: 360px) {
     :root {
-        --card-scale: 1.00;       /* 0.65 * 1.00 = 0.65 final, unos 325px en teléfonos chicos */
-        --card-y: -100px;
+        --card-scale: 0.91;       /* 0.65 * 0.91 = 0.59 final, unos 450px de alto en teléfonos chicos */
+        --card-y: -110px;
         --envelope-y: 120px;
     }
 }
@@ -162,30 +162,30 @@ body {
 
 /* Push wrapper down when envelope is opened to make space at the top for the giant card */
 .envelope-wrapper.open {
-    margin-top: 300px;
+    margin-top: 400px;
 }
 
 @media (max-width: 600px) {
     .envelope-wrapper.open {
-        margin-top: 240px;
+        margin-top: 310px;
     }
 }
 
 @media (max-width: 440px) {
     .envelope-wrapper.open {
-        margin-top: 200px;
+        margin-top: 280px;
     }
 }
 
 @media (max-width: 400px) {
     .envelope-wrapper.open {
-        margin-top: 180px;
+        margin-top: 260px;
     }
 }
 
 @media (max-width: 360px) {
     .envelope-wrapper.open {
-        margin-top: 160px;
+        margin-top: 230px;
     }
 }
 
@@ -371,19 +371,19 @@ body {
 /* The Card (Invitation) */
 .card {
     position: absolute;
-    width: 500px;
-    height: 500px;
+    width: 350px;
+    height: 758px;
     left: 50%;
     top: 50%;
-    margin-left: -250px; /* Centra horizontalmente para tamaño nativo de 500px */
-    margin-top: -250px;  /* Centra verticalmente para tamaño nativo de 500px */
+    margin-left: -175px; /* Centra horizontalmente para tamaño nativo de 350px */
+    margin-top: -379px;  /* Centra verticalmente para tamaño nativo de 758px */
     background: #fff;
     z-index: 3;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     overflow: hidden;
     transition: all 0.3s ease;
-    transform: scale(0.36); /* Escala inicial para que parezca de 180x180px (180 / 500 = 0.36) */
+    transform: scale(0.24); /* Escala inicial para que quepa completamente en el sobre (350 * 0.24 = 84px de ancho) */
     transform-origin: center center;
     
     /* Propiedades para mejorar la nitidez de la imagen al renderizarse */
@@ -410,19 +410,19 @@ body {
 /* Animations */
 @keyframes slideOutCard {
     0% {
-        transform: scale(0.36) translateY(0) rotate(0deg);
+        transform: scale(0.24) translateY(0) rotate(0deg);
         z-index: 3;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     }
     35% {
-        /* Se desliza completamente hacia afuera (150px a escala 0.36 es translateY(-416px)) */
-        transform: scale(0.36) translateY(-416px) rotate(-5deg);
+        /* Se desliza completamente hacia afuera (150px a escala 0.24 es translateY(-600px)) */
+        transform: scale(0.24) translateY(-600px) rotate(-5deg);
         z-index: 15;
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     }
     60% {
         /* Escala un poco mientras rota hacia el otro lado */
-        transform: scale(0.40) translateY(-416px) rotate(3deg);
+        transform: scale(0.28) translateY(-600px) rotate(3deg);
         z-index: 15;
     }
     100% {
@@ -452,7 +452,7 @@ body {
 
 /* Actions Buttons Container */
 .actions-container {
-    margin-top: 150px;
+    margin-top: 230px;
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
@@ -464,21 +464,21 @@ body {
 
 @media (max-width: 600px) {
     .actions-container {
-        margin-top: 110px;
+        margin-top: 160px;
         gap: 12px;
     }
 }
 
 @media (max-width: 440px) {
     .actions-container {
-        margin-top: 90px;
+        margin-top: 110px;
         gap: 12px;
     }
 }
 
 @media (max-width: 400px) {
     .actions-container {
-        margin-top: 80px;
+        margin-top: 90px;
         gap: 12px;
     }
 }

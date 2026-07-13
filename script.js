@@ -192,25 +192,46 @@ class Particle {
     }
 }
 
-// Clase Partícula de Explosión (Chispas doradas al abrir)
+// Clase Partícula de Explosión (Confeti colorido y dinámico)
 class BurstParticle {
     constructor(x, y) {
         this.x = x;
         this.y = y;
-        this.size = Math.random() * 5 + 3;
         
-        // Dirección aleatoria en 360 grados
+        // Tamaño del confeti
+        this.sizeWidth = Math.random() * 8 + 4;
+        this.sizeHeight = Math.random() * 12 + 6;
+        
+        // Velocidad y dirección (con inclinación hacia arriba)
         const angle = Math.random() * Math.PI * 2;
-        const velocity = Math.random() * 6 + 2;
+        const velocity = Math.random() * 8 + 3;
         
         this.speedX = Math.cos(angle) * velocity;
-        this.speedY = Math.sin(angle) * velocity;
+        this.speedY = Math.sin(angle) * velocity - 2; // Bias hacia arriba
         
-        this.gravity = 0.15;
-        this.friction = 0.96;
+        this.gravity = 0.2;
+        this.friction = 0.97;
+        
         this.alpha = 1;
-        this.decay = Math.random() * 0.02 + 0.015;
-        this.color = `rgba(245, 158, 11, ${this.alpha})`;
+        this.decay = Math.random() * 0.012 + 0.008; // Mayor duración en pantalla
+        
+        // Paleta de colores festiva
+        const colors = [
+            "#38bdf8", // Celeste cielo
+            "#0284c7", // Celeste oscuro
+            "#f59e0b", // Oro brillante
+            "#fbbf24", // Dorado claro
+            "#ec4899", // Rosa
+            "#10b981", // Verde oliva claro
+            "#ffffff", // Blanco
+            "#a7f3d0"  // Verde menta
+        ];
+        this.color = colors[Math.floor(Math.random() * colors.length)];
+        
+        // Rotación y giro en el aire
+        this.rotationAngle = Math.random() * Math.PI * 2;
+        this.rotationSpeed = (Math.random() - 0.5) * 0.3;
+        this.shape = Math.random() > 0.5 ? 'rect' : 'circle';
     }
 
     update() {
@@ -221,12 +242,24 @@ class BurstParticle {
         this.x += this.speedX;
         this.y += this.speedY;
         this.alpha -= this.decay;
+        this.rotationAngle += this.rotationSpeed;
     }
 
     draw() {
         ctx.save();
         ctx.globalAlpha = this.alpha;
-        drawStar(ctx, this.x, this.y, this.size, `rgba(245, 158, 11, ${this.alpha})`);
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotationAngle);
+        ctx.fillStyle = this.color;
+        
+        if (this.shape === 'rect') {
+            ctx.fillRect(-this.sizeWidth / 2, -this.sizeHeight / 2, this.sizeWidth, this.sizeHeight);
+        } else {
+            ctx.beginPath();
+            ctx.arc(0, 0, this.sizeWidth / 2, 0, Math.PI * 2);
+            ctx.fill();
+        }
+        
         ctx.restore();
     }
 }
@@ -278,7 +311,7 @@ function triggerSealBurst() {
     const x = rect.width / 2;
     const y = rect.height / 2;
 
-    const burstCount = 60;
+    const burstCount = 180; // Más partículas para un efecto festivo potente
     for (let i = 0; i < burstCount; i++) {
         burstParticles.push(new BurstParticle(x, y));
     }
