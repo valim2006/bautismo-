@@ -17,47 +17,55 @@
     --gold-light: #f59e0b;        /* Oro brillante */
     --gold-dark: #b45309;         /* Oro oscuro */
     --text-color: #1e3a8a;        /* Azul oscuro a tono con León */
-    --card-scale: 1.25;           /* Nativamente 500px, escalado a 1.25 es 625px de ancho en desktop (Súper grande) */
-    --card-y: -130px;             /* Desplazamiento Y de la tarjeta en desktop */
+    --card-scale: 1.15;           /* Nativamente 600px, escalado a 1.15 es 690px de ancho en desktop (Gigante y hermoso!) */
+    --card-y: -150px;             /* Desplazamiento Y de la tarjeta en desktop */
     --envelope-y: 200px;          /* Desplazamiento Y del sobre en desktop */
 }
 
 @media (max-width: 600px) {
     :root {
-        --card-scale: 0.85;       /* 500px * 0.85 = 425px de ancho en pantallas medianas */
-        --card-y: -80px;          /* Desplazamiento Y de la tarjeta en mobile grande */
+        --card-scale: 0.76;       /* 600px * 0.76 = 456px de ancho en pantallas medianas */
+        --card-y: -90px;          /* Desplazamiento Y de la tarjeta en mobile grande */
         --envelope-y: 150px;      /* Desplazamiento del sobre hacia abajo en mobile grande */
+    }
+}
+
+@media (max-width: 500px) {
+    :root {
+        --card-scale: 0.72;       /* 600px * 0.72 = 432px de ancho */
+        --card-y: -85px;
+        --envelope-y: 145px;
     }
 }
 
 @media (max-width: 440px) {
     :root {
-        --card-scale: 0.78;       /* 500px * 0.78 = 390px de ancho */
-        --card-y: -75px;
+        --card-scale: 0.68;       /* 600px * 0.68 = 408px de ancho */
+        --card-y: -80px;
         --envelope-y: 140px;
     }
 }
 
 @media (max-width: 400px) {
     :root {
-        --card-scale: 0.72;       /* 500px * 0.72 = 360px de ancho, ideal para teléfonos standard */
-        --card-y: -65px;
+        --card-scale: 0.63;       /* 600px * 0.63 = 378px de ancho, ideal para teléfonos standard */
+        --card-y: -75px;
         --envelope-y: 130px;
     }
 }
 
 @media (max-width: 360px) {
     :root {
-        --card-scale: 0.62;       /* 500px * 0.62 = 310px de ancho, ideal para teléfonos pequeños */
-        --card-y: -55px;
+        --card-scale: 0.57;       /* 600px * 0.57 = 342px de ancho, ideal para teléfonos pequeños */
+        --card-y: -65px;
         --envelope-y: 120px;
     }
 }
 
 @media (max-width: 330px) {
     :root {
-        --card-scale: 0.56;       /* 500px * 0.56 = 280px de ancho, para teléfonos muy chicos */
-        --card-y: -45px;
+        --card-scale: 0.50;       /* 600px * 0.50 = 300px de ancho, para teléfonos muy chicos */
+        --card-y: -55px;
         --envelope-y: 110px;
     }
 }
@@ -168,20 +176,26 @@ body {
     transition: margin-top 1.2s cubic-bezier(0.25, 1, 0.5, 1);
 }
 
-/* Push wrapper down when envelope is opened to make space at the top */
+/* Push wrapper down when envelope is opened to make space at the top for the giant card */
 .envelope-wrapper.open {
-    margin-top: 200px; /* Evita que la tarjeta escalada se corte arriba en desktop */
+    margin-top: 360px; /* Evita que la tarjeta de 600px escalada se corte arriba en desktop */
 }
 
 @media (max-width: 600px) {
     .envelope-wrapper.open {
-        margin-top: 150px; /* Evita que la tarjeta se corte arriba en pantallas de celular */
+        margin-top: 260px; /* Evita que la tarjeta se corte arriba en pantallas de tablet/celular grande */
     }
 }
 
 @media (max-width: 400px) {
     .envelope-wrapper.open {
-        margin-top: 120px; /* Menos espacio en celulares chicos para acomodar botones */
+        margin-top: 220px; /* Evita recortes en celulares normales */
+    }
+}
+
+@media (max-width: 360px) {
+    .envelope-wrapper.open {
+        margin-top: 190px; /* Evita recortes en celulares pequeños */
     }
 }
 
@@ -367,19 +381,19 @@ body {
 /* The Card (Invitation) */
 .card {
     position: absolute;
-    width: 500px;
-    height: 500px;
+    width: 600px;
+    height: 600px;
     left: 50%;
     top: 50%;
-    margin-left: -250px; /* Centra horizontalmente para tamaño nativo de 500px */
-    margin-top: -250px;  /* Centra verticalmente para tamaño nativo de 500px */
+    margin-left: -300px; /* Centra horizontalmente para tamaño nativo de 600px */
+    margin-top: -300px;  /* Centra verticalmente para tamaño nativo de 600px */
     background: #fff;
     z-index: 3;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     overflow: hidden;
     transition: all 0.3s ease;
-    transform: scale(0.36); /* Escala inicial para que parezca de 180x180px (180 / 500 = 0.36) */
+    transform: scale(0.30); /* Escala inicial para que parezca de 180x180px (180 / 600 = 0.30) */
     transform-origin: center center;
     
     /* Propiedades para mejorar la nitidez de la imagen al renderizarse */
@@ -406,19 +420,19 @@ body {
 /* Animations */
 @keyframes slideOutCard {
     0% {
-        transform: scale(0.36) translateY(0) rotate(0deg);
+        transform: scale(0.30) translateY(0) rotate(0deg);
         z-index: 3;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     }
     35% {
-        /* Se desliza completamente hacia afuera (150px a escala 0.36 es translateY(-416px)) */
-        transform: scale(0.36) translateY(-416px) rotate(-5deg);
+        /* Se desliza completamente hacia afuera (150px a escala 0.30 es translateY(-500px)) */
+        transform: scale(0.30) translateY(-500px) rotate(-5deg);
         z-index: 15;
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     }
     60% {
         /* Escala un poco mientras rota hacia el otro lado */
-        transform: scale(0.40) translateY(-416px) rotate(3deg);
+        transform: scale(0.34) translateY(-500px) rotate(3deg);
         z-index: 15;
     }
     100% {
@@ -448,7 +462,7 @@ body {
 
 /* Actions Buttons Container */
 .actions-container {
-    margin-top: 180px; /* Reducido de 240px para que el botón esté más cerca de la tarjeta grande en desktop */
+    margin-top: 190px; /* Reducido para que el botón esté más cerca de la tarjeta grande en desktop */
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
@@ -467,7 +481,7 @@ body {
 
 @media (max-width: 400px) {
     .actions-container {
-        margin-top: 90px; /* Reducido en pantallas chicas para compactar */
+        margin-top: 100px; /* Reducido en pantallas chicas para compactar */
         gap: 12px;
     }
 }
