@@ -30,6 +30,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const helperText = document.getElementById("helper-text");
     const actionsContainer = document.getElementById("actions-container");
     const bgMusic = document.getElementById("bg-music");
+    const sfxOpen = document.getElementById("sfx-open");
     const musicToggle = document.getElementById("music-toggle");
     const iconSoundOn = document.getElementById("icon-sound-on");
     const iconSoundOff = document.getElementById("icon-sound-off");
@@ -49,7 +50,8 @@ document.addEventListener("DOMContentLoaded", () => {
         document.getElementById("envelope-wrapper").classList.add("open");
         document.querySelector(".main-container").classList.add("open");
 
-        // 2. Intentar reproducir música
+        // 2. Intentar reproducir música y sonido SFX
+        playSfx();
         playMusic();
 
         // 3. Ocultar el texto de ayuda
@@ -84,13 +86,30 @@ document.addEventListener("DOMContentLoaded", () => {
         }
     });
 
+    function playSfx() {
+        if (sfxOpen) {
+            sfxOpen.currentTime = 0;
+            const playPromise = sfxOpen.play();
+            if (playPromise !== undefined && typeof playPromise.then === 'function') {
+                playPromise.catch(err => console.log("SFX bloqueado:", err));
+            }
+        }
+    }
+
     function playMusic() {
-        bgMusic.play().then(() => {
+        const playPromise = bgMusic.play();
+        if (playPromise !== undefined && typeof playPromise.then === 'function') {
+            playPromise.then(() => {
+                iconSoundOn.classList.remove("hidden");
+                iconSoundOff.classList.add("hidden");
+            }).catch(err => {
+                console.log("El navegador bloqueó la reproducción automática, esperando interacción:", err);
+            });
+        } else {
+            // Soporte para navegadores antiguos que no retornan Promise
             iconSoundOn.classList.remove("hidden");
             iconSoundOff.classList.add("hidden");
-        }).catch(err => {
-            console.log("El navegador bloqueó la reproducción automática, esperando interacción:", err);
-        });
+        }
     }
 
     function pauseMusic() {
