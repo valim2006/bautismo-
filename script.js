@@ -67,13 +67,14 @@ document.addEventListener("DOMContentLoaded", () => {
         // 5. Explotar chispas doradas desde el sello
         triggerSealBurst();
 
-        // 6. Mostrar botones de acción después de que la tarjeta suba y se amplíe (aprox. 1.8s)
+        // 6. Mostrar botones de acción y activar modo pantalla completa al concluir la animación (2.4s)
         setTimeout(() => {
+            document.querySelector(".main-container").classList.add("fullscreen");
             actionsContainer.classList.remove("hidden");
             actionsContainer.classList.add("visible");
             // Permitir scroll si es necesario
             document.body.style.overflowY = "auto";
-        }, 1800);
+        }, 2400);
     });
 
     // Control de música
