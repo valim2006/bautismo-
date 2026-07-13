@@ -69,6 +69,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
         // 6. Mostrar botones de acción y activar modo pantalla completa al concluir la animación (2.4s)
         setTimeout(() => {
+            const card = document.getElementById("invitation-card");
+            if (card) {
+                document.body.appendChild(card);
+                card.classList.add("fullscreen-card");
+            }
             document.querySelector(".main-container").classList.add("fullscreen");
             actionsContainer.classList.remove("hidden");
             actionsContainer.classList.add("visible");
