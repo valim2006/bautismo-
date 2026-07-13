@@ -17,16 +17,48 @@
     --gold-light: #f59e0b;        /* Oro brillante */
     --gold-dark: #b45309;         /* Oro oscuro */
     --text-color: #1e3a8a;        /* Azul oscuro a tono con León */
-    --card-scale: 1.0;            /* Nativamente 450px de ancho en desktop */
-    --card-y: -110px;             /* Desplazamiento Y de la tarjeta en desktop */
-    --envelope-y: 180px;          /* Desplazamiento Y del sobre en desktop */
+    --card-scale: 1.25;           /* Nativamente 500px, escalado a 1.25 es 625px de ancho en desktop (Súper grande) */
+    --card-y: -130px;             /* Desplazamiento Y de la tarjeta en desktop */
+    --envelope-y: 200px;          /* Desplazamiento Y del sobre en desktop */
 }
 
 @media (max-width: 600px) {
     :root {
-        --card-scale: 0.68;       /* 450px * 0.68 = 306px de ancho, ideal para cualquier celular */
-        --card-y: -50px;          /* Menor desplazamiento en celular para evitar desbordar arriba */
-        --envelope-y: 130px;      /* Desplazamiento del sobre hacia abajo en mobile */
+        --card-scale: 0.85;       /* 500px * 0.85 = 425px de ancho en pantallas medianas */
+        --card-y: -80px;          /* Desplazamiento Y de la tarjeta en mobile grande */
+        --envelope-y: 150px;      /* Desplazamiento del sobre hacia abajo en mobile grande */
+    }
+}
+
+@media (max-width: 440px) {
+    :root {
+        --card-scale: 0.78;       /* 500px * 0.78 = 390px de ancho */
+        --card-y: -75px;
+        --envelope-y: 140px;
+    }
+}
+
+@media (max-width: 400px) {
+    :root {
+        --card-scale: 0.72;       /* 500px * 0.72 = 360px de ancho, ideal para teléfonos standard */
+        --card-y: -65px;
+        --envelope-y: 130px;
+    }
+}
+
+@media (max-width: 360px) {
+    :root {
+        --card-scale: 0.62;       /* 500px * 0.62 = 310px de ancho, ideal para teléfonos pequeños */
+        --card-y: -55px;
+        --envelope-y: 120px;
+    }
+}
+
+@media (max-width: 330px) {
+    :root {
+        --card-scale: 0.56;       /* 500px * 0.56 = 280px de ancho, para teléfonos muy chicos */
+        --card-y: -45px;
+        --envelope-y: 110px;
     }
 }
 
@@ -138,12 +170,18 @@ body {
 
 /* Push wrapper down when envelope is opened to make space at the top */
 .envelope-wrapper.open {
-    margin-top: 160px; /* Evita que la tarjeta escalada se corte arriba en desktop */
+    margin-top: 200px; /* Evita que la tarjeta escalada se corte arriba en desktop */
 }
 
 @media (max-width: 600px) {
     .envelope-wrapper.open {
-        margin-top: 120px; /* Evita que la tarjeta se corte arriba en pantallas de celular */
+        margin-top: 150px; /* Evita que la tarjeta se corte arriba en pantallas de celular */
+    }
+}
+
+@media (max-width: 400px) {
+    .envelope-wrapper.open {
+        margin-top: 120px; /* Menos espacio en celulares chicos para acomodar botones */
     }
 }
 
@@ -329,19 +367,19 @@ body {
 /* The Card (Invitation) */
 .card {
     position: absolute;
-    width: 450px;
-    height: 450px;
+    width: 500px;
+    height: 500px;
     left: 50%;
     top: 50%;
-    margin-left: -225px; /* Centra horizontalmente para tamaño nativo de 450px */
-    margin-top: -225px;  /* Centra verticalmente para tamaño nativo de 450px */
+    margin-left: -250px; /* Centra horizontalmente para tamaño nativo de 500px */
+    margin-top: -250px;  /* Centra verticalmente para tamaño nativo de 500px */
     background: #fff;
     z-index: 3;
     border-radius: 8px;
     box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     overflow: hidden;
     transition: all 0.3s ease;
-    transform: scale(0.4); /* Escala inicial para que parezca de 180x180px y quepa en el sobre */
+    transform: scale(0.36); /* Escala inicial para que parezca de 180x180px (180 / 500 = 0.36) */
     transform-origin: center center;
     
     /* Propiedades para mejorar la nitidez de la imagen al renderizarse */
@@ -368,19 +406,19 @@ body {
 /* Animations */
 @keyframes slideOutCard {
     0% {
-        transform: scale(0.4) translateY(0) rotate(0deg);
+        transform: scale(0.36) translateY(0) rotate(0deg);
         z-index: 3;
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
     }
     35% {
-        /* Se desliza completamente hacia afuera (150px a escala 0.4 es translateY(-375px)) */
-        transform: scale(0.4) translateY(-375px) rotate(-5deg);
+        /* Se desliza completamente hacia afuera (150px a escala 0.36 es translateY(-416px)) */
+        transform: scale(0.36) translateY(-416px) rotate(-5deg);
         z-index: 15;
         box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
     }
     60% {
         /* Escala un poco mientras rota hacia el otro lado */
-        transform: scale(0.45) translateY(-375px) rotate(3deg);
+        transform: scale(0.40) translateY(-416px) rotate(3deg);
         z-index: 15;
     }
     100% {
@@ -410,7 +448,7 @@ body {
 
 /* Actions Buttons Container */
 .actions-container {
-    margin-top: 240px; /* Ajuste para dar espacio a la tarjeta ampliada */
+    margin-top: 180px; /* Reducido de 240px para que el botón esté más cerca de la tarjeta grande en desktop */
     display: flex;
     flex-wrap: wrap;
     gap: 15px;
@@ -422,7 +460,14 @@ body {
 
 @media (max-width: 600px) {
     .actions-container {
-        margin-top: 90px; /* Reduce espacio en móvil para que el botón RSVP quede cerca de la tarjeta */
+        margin-top: 120px; /* Espacio para tarjeta más grande en mobile */
+        gap: 12px;
+    }
+}
+
+@media (max-width: 400px) {
+    .actions-container {
+        margin-top: 90px; /* Reducido en pantallas chicas para compactar */
         gap: 12px;
     }
 }

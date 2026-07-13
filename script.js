@@ -3,10 +3,10 @@
 // ==========================================
 // Número de WhatsApp para confirmar (código de país + código de área + número, sin '+' ni espacios)
 // Ejemplo para Argentina: '5491112345678'
-const WHATSAPP_PHONE = "5491131707835"; 
+const WHATSAPP_PHONE = "5493854091919"; 
 
 // Mensaje predeterminado de confirmación
-const CONFIRM_MESSAGE = "¡Hola! Quiero confirmar mi asistencia al bautismo de León el sábado 25/07 a las 10:00 hs. ✨";
+const CONFIRM_MESSAGE = "Hola, quiero confirmar mi asistencia al bautismo de León";
 
 // Ubicación en Google Maps de la Parroquia San Juan Diego
 const GOOGLE_MAPS_QUERY = "Parroquia San Juan Diego CABA"; // Puedes poner dirección o link directo
