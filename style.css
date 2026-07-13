@@ -609,15 +609,17 @@ body {
     transition: opacity 0.8s ease !important;
 }
 
-/* Deshabilitar perspectiva e inclinaciones del contenedor del sobre */
+/* Deshabilitar perspectiva, inclinaciones y animaciones del contenedor del sobre */
 .main-container.fullscreen .envelope-wrapper {
     perspective: none !important;
     transform: none !important;
+    animation: none !important;
     transition: all 0.8s ease;
 }
 
 .main-container.fullscreen .envelope {
     transform: none !important;
+    animation: none !important; /* Desactiva la animación moveEnvelope */
     transition: all 0.8s ease;
 }
 
@@ -634,7 +636,8 @@ body {
     box-shadow: 0 0 50px rgba(0, 0, 0, 0.3) !important;
     border-radius: 0 !important; /* Diseño inmersivo total */
     z-index: 9999 !important;
-    animation: fadeInFullscreen 0.8s cubic-bezier(0.25, 1, 0.5, 1) forwards;
+    animation: none !important; /* Desactiva la animación slideOutCard */
+    transition: all 0.8s cubic-bezier(0.25, 1, 0.5, 1) !important;
 }
 
 /* Botón RSVP flotante premium sobre la tarjeta al fondo de la pantalla */
