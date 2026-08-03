@@ -12,13 +12,13 @@ const CONFIRM_MESSAGE = "Hola, quiero confirmar mi asistencia al bautismo de Le�
 const GOOGLE_MAPS_QUERY = "Parroquia San Juan Diego CABA"; // Puedes poner dirección o link directo
 const GOOGLE_MAPS_URL = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(GOOGLE_MAPS_QUERY)}`;
 
-// Datos para el calendario (Fecha: 25 de Julio de 2026, 10:00 AM a 12:00 PM)
+// Datos para el calendario (Fecha: Sábado 15 de Julio, 10:00 AM a 12:00 PM)
 const CALENDAR_EVENT = {
     title: "Bautismo de León 🕊️",
     description: "Te invitamos a compartir el bautismo de León. Lugar: Parroquia San Juan Diego.",
     location: "Parroquia San Juan Diego, CABA",
-    startDate: "20260725T100000", // Formato YYYYMMDDTHHMMSS
-    endDate: "20260725T120000"
+    startDate: "20260715T100000", // Formato YYYYMMDDTHHMMSS
+    endDate: "20260715T120000"
 };
 
 // ==========================================
